@@ -1,0 +1,1 @@
+document.getElementById("rssForm").addEventListener("submit",(function(e){e.preventDefault();var t=document.getElementById("rssURL").value;console.log("Добавленный RSS-поток:",t),alert("RSS-поток добавлен: "+t),document.getElementById("rssURL").value=""}));
