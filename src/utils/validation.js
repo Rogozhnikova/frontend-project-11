@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export default (url, addedUrls, i18n) => {
+export default (url, urlsList, i18n) => {
     yup.setLocale({
       string: {
         url: i18n.t('form.errors.notValidUrl'),
@@ -14,6 +14,6 @@ export default (url, addedUrls, i18n) => {
       .string()
       .required()
       .url()
-      .notOneOf(addedUrls);
+      .notOneOf(urlsList);
     return schema.validate(url);
   };
