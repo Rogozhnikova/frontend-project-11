@@ -13,3 +13,6 @@ yarn build
 ```
 
 to bundle your application
+
+Демо проекта
+https://frontend-project-rogozhnikova-3-rss.vercel.app
