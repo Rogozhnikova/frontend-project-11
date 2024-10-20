@@ -2,7 +2,7 @@ import i18next from 'i18next';
 import _ from 'lodash';
 import initView from './view.js';
 import ru from './locales/ru.js';
-import validateUrl from './utils/validator.js';
+import validateUrl from './utils/validation.js';
 import fetchData from './utils/fetchData.js';
 import parseXml from './utils/parser.js';
 import getFeedAndPosts from './utils/utils.js';

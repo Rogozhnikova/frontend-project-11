@@ -33,6 +33,15 @@ const config = {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
                 type: 'asset',
             },
+            {
+                test: /\.scss$/, // Регулярное выражение для файлов .scss
+                use: [
+                  'style-loader', // Вставляет CSS в DOM
+                  'css-loader',   // Понимает @import и url() как import/require()
+                  'sass-loader',
+                  'postcss-loader'  // Компилирует Sass в CSS
+                ]
+              }
 
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
