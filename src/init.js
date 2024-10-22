@@ -4,9 +4,9 @@ import initView from './view.js';
 import ru from './locales/ru.js';
 import validateUrl from './utils/validation.js';
 import fetchData from './utils/fetchData.js';
-import parseXml from './utils/parser.js';
 import getFeedAndPosts from './utils/utils.js';
 import updatePosts from './utils/updater.js';
+import axios from 'axios';
 
 export default () => {
   const elements = {
@@ -20,6 +20,7 @@ export default () => {
     spanSpinner: document.createElement('span'),
     spanLoading: document.createElement('span'),
   };
+
   const initialState = {
     rssForm: {
       state: 'filling',
@@ -29,10 +30,11 @@ export default () => {
     feeds: [],
     posts: [],
     uiState: {
-      visitedPosts: [],
+      visitedPosts: new Set(),
       modalId: null,
     },
   };
+
   const i18n = i18next.createInstance();
   i18n.init({
     lng: 'ru',
@@ -41,7 +43,9 @@ export default () => {
       ru,
     },
   });
+
   const watchedState = initView(initialState, elements, i18n);
+
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
     watchedState.rssForm.state = 'filling';
@@ -55,8 +59,7 @@ export default () => {
         return fetchData(validUrl);
       })
       .then(({ data }) => {
-        const parsedXml = parseXml(data.contents);
-        const [feed, posts] = getFeedAndPosts(parsedXml);
+        const [feed, posts] = getFeedAndPosts(data.contents);
         const newFeed = { ...feed, id: _.uniqueId(), url };
         const newPosts = posts.map((post) => ({ ...post, id: _.uniqueId(), feedId: newFeed.id }));
         watchedState.feeds = [newFeed, ...watchedState.feeds];
@@ -65,22 +68,28 @@ export default () => {
       })
       .catch((err) => {
         watchedState.rssForm.valid = err.name !== 'ValidationError';
-        watchedState.rssForm.error = err.isAxiosError
-          ? 'form.errors.networkProblems'
-          : err.message;
+        if (err.name === 'ValidationError') {
+          watchedState.rssForm.error = err.message;
+        } else if (err.NotValidRss) {
+          watchedState.rssForm.error = 'form.errors.notValidRss';
+        } else if (axios.isAxiosError(err)) {
+          watchedState.rssForm.error = 'form.errors.networkProblems';
+        }
         watchedState.rssForm.state = 'filling';
       });
   });
+
   elements.postsContainer.addEventListener('click', ({ target }) => {
     if (target.closest('a')) {
       const { id } = target.dataset;
-      watchedState.uiState.visitedPosts = [...watchedState.uiState.visitedPosts, id];
+      watchedState.uiState.visitedPosts.add(id);
     }
     if (target.closest('button')) {
       const { id } = target.dataset;
-      watchedState.uiState.visitedPosts = [...watchedState.uiState.visitedPosts, id];
+      watchedState.uiState.visitedPosts.add(id);
       watchedState.uiState.modalId = id;
     }
   });
+
   setTimeout(() => updatePosts(watchedState), 5000);
 };
