@@ -68,6 +68,10 @@ const renderPosts = (state, elements, i18n) => {
 const renderError = (error, elements, i18n) => {
   elements.feedbackContainer.textContent = '';
   if (error) {
+    elements.input.readOnly = false;
+    elements.button.disabled = false;
+    elements.button.innerHTML = '';
+    elements.button.textContent = 'Добавить';
     elements.feedbackContainer.classList.remove('text-success');
     elements.feedbackContainer.classList.add('text-danger');
     elements.feedbackContainer.textContent = i18n.t(error);
@@ -90,7 +94,7 @@ const handleProcessState = (processState, elements, i18n) => {
     case 'processing':
       elements.input.readOnly = true;
       elements.button.disabled = true;
-    elements.button.innerHTML = '';
+      elements.button.innerHTML = '';
       elements.spanSpinner.classList.add('spinner-border', 'spinner-border-sm');
       elements.spanSpinner.setAttribute('role', 'status');
       elements.spanSpinner.setAttribute('aria-hidden', 'true');
