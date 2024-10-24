@@ -121,7 +121,7 @@ const handleProcessState = (processState, elements, i18n) => {
       // elements.button.append(elements.spanSpinner);
       elements.spanLoading.classList.add('sr-only');
       elements.spanLoading.textContent = 'Добавить';
-      // elements.button.append(elements.spanLoading);
+      elements.button.append(elements.spanLoading);
       break;
     case 'success':
       elements.input.readOnly = false;
