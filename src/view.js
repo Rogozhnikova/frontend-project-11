@@ -123,6 +123,7 @@ const handleProcessState = (processState, elements, i18n) => {
       elements.input.readOnly = false;
       elements.button.disabled = false;
       elements.button.innerHTML = '';
+      elements.input.click();
       elements.button.textContent = 'Добавить';
       elements.form.reset();
       elements.form.focus();
