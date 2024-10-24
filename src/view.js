@@ -64,16 +64,16 @@ const renderPosts = (state, elements, i18n) => {
     const aEl = document.createElement('a');
     aEl.setAttribute('class', classes);
     aEl.setAttribute('href', link);
-    aEl.dataset.id = post.id;
+    aEl.dataset.id = id;
     aEl.setAttribute('target', '_blank');
     aEl.setAttribute('rel', 'noopener noreferrer');
-    aEl.textContent = post.title;
+    aEl.textContent = title;
     liEl.append(aEl);
 
     const buttonEl = document.createElement('button');
     buttonEl.setAttribute('type', 'button');
     buttonEl.classList.add('btn', 'btn-outline-primary', 'btn-sm');
-    buttonEl.dataset.id = post.id;
+    buttonEl.dataset.id = id;
     buttonEl.dataset.bsToggle = 'modal';
     buttonEl.dataset.bsTarget = '#modal';
     buttonEl.textContent = i18n.t('posts.button');
