@@ -52,7 +52,9 @@
     "i18next": "^23.16.0",
     "lodash": "^4.17.21",
     "on-change": "^5.0.1",
+    "postcss": "^8.4.47",
     "postcss-loader": "^8.1.1",
+    "postcss-preset-env": "^10.0.8",
     "prettier": "^3.3.3",
     "yup": "^1.4.0"
   }
