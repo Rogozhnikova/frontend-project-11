@@ -115,13 +115,11 @@ const handleProcessState = (processState, elements, i18n) => {
       elements.input.readOnly = true;
       elements.button.disabled = true;
       elements.button.innerHTML = '';
-      // elements.spanSpinner.classList.add('spinner-border', 'spinner-border-sm');
-      // elements.spanSpinner.setAttribute('role', 'status');
-      // elements.spanSpinner.setAttribute('aria-hidden', 'true');
-      // elements.button.append(elements.spanSpinner);
       elements.spanLoading.classList.add('sr-only');
       elements.spanLoading.textContent = 'Добавить';
       elements.button.append(elements.spanLoading);
+      elements.form.reset();
+      elements.form.focus();
       break;
     case 'success':
       elements.input.readOnly = false;
