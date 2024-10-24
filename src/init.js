@@ -1,12 +1,12 @@
 import i18next from 'i18next';
 import _ from 'lodash';
+import axios from 'axios';
+import fetchData from './utils/fetchData.js';
 import initView from './view.js';
 import ru from './locales/ru.js';
 import validateUrl from './utils/validation.js';
-import fetchData from './utils/fetchData.js';
-import getFeedAndPosts from './utils/utils.js';
+import getFeedAndPosts from './utils/parser.js';
 import updatePosts from './utils/updater.js';
-import axios from 'axios';
 
 export default () => {
   const elements = {
