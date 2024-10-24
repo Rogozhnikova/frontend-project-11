@@ -115,11 +115,9 @@ const handleProcessState = (processState, elements, i18n) => {
       elements.input.readOnly = true;
       elements.button.disabled = true;
       elements.button.innerHTML = '';
-      elements.spanLoading.classList.add('sr-only');
+     // elements.spanLoading.classList.add('sr-only');
       elements.spanLoading.textContent = 'Добавить';
       elements.button.append(elements.spanLoading);
-      elements.form.reset();
-      elements.form.focus();
       break;
     case 'success':
       elements.input.readOnly = false;
@@ -127,7 +125,9 @@ const handleProcessState = (processState, elements, i18n) => {
       elements.button.innerHTML = '';
       elements.button.textContent = 'Добавить';
       elements.form.reset();
-      elements.form.focus();
+      setTimeout(() => {
+        elements.form.focus();
+      }, 0);
       elements.feedbackContainer.classList.remove('text-danger');
       elements.feedbackContainer.classList.add('text-success');
       elements.feedbackContainer.textContent = i18n.t('form.success');
