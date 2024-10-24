@@ -118,13 +118,11 @@ const handleProcessState = (processState, elements, i18n) => {
       elements.spanLoading.classList.add('sr-only');
       elements.spanLoading.textContent = 'Добавить';
       elements.button.append(elements.spanLoading);
-      elements.form.reset();
-      elements.form.focus();
       break;
     case 'success':
       elements.input.readOnly = false;
       elements.button.disabled = false;
-      elements.button.innerHTML = '';
+      // elements.button.innerHTML = '';
       elements.button.textContent = 'Добавить';
       elements.form.reset();
       elements.form.focus();
