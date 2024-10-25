@@ -126,6 +126,7 @@ const handleProcessState = (processState, elements, i18n) => {
       elements.button.textContent = 'Добавить';
       elements.form.reset();
       elements.form.focus();
+      elements.input.click();
       elements.feedbackContainer.classList.remove('text-danger');
       elements.feedbackContainer.classList.add('text-success');
       elements.feedbackContainer.textContent = i18n.t('form.success');
